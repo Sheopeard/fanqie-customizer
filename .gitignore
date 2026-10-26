@@ -3,3 +3,8 @@
 *.keystore
 *.log
 .DS_Store
+
+/analysis/
+/fanqie-7.4.1.32/
+__pycache__/
+*.pyc

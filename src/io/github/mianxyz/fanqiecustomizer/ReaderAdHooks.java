@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** Native reader ad insertion and popup queue boundaries for 7.3.9.32. */
+/** Native reader ad insertion and popup queue boundaries for 7.4.1.32. */
 final class ReaderAdHooks {
     private static final String AD="com.dragon.read.component.biz.impl.NsAdImpl";
     private static final String CLIENT="com.dragon.reader.lib.ReaderClient";
@@ -35,7 +35,7 @@ final class ReaderAdHooks {
         adWindows();
         livePromotions();
         // This interceptor inserts cached or newly-created ad pages before/after text.
-        for(String name:new String[]{"b","c"})hook("com.dragon.read.reader.depend.interceptors.b",name,"boolean",new String[]{"qo7.b"},
+        for(String name:new String[]{"b","c"})hook("com.dragon.read.reader.depend.interceptors.b",name,"boolean",new String[]{"up7.b"},
             (receiver,args)->reader(field(receiver,"f"))?Decision.stop(false,"Reader full-page ad interceptor bypassed: "+name):Decision.pass());
         hook("com.dragon.read.reader.ad.readflow.ReadFlowVerticalMiniAdHelper","a",
             "com.dragon.read.ad.onestop.readflow.ReadFlowOneStopMiniAdLine",new String[]{"com.dragon.read.reader.ad.model.AtRequestArgs",CLIENT},
@@ -44,25 +44,25 @@ final class ReaderAdHooks {
             (receiver,args)->reader(args[2])||readerClient(args[1])?Decision.stop(null,"Reader brand full-page ad insertion suppressed"):Decision.pass());
         hook("com.dragon.read.component.NsUtilsDependImpl","canShowScreenAd","boolean",new String[]{"java.lang.Object"},
             (receiver,args)->reader(args[0])||host.readerVisible()?Decision.stop(false,"Reader automatic screen ad refused"):Decision.pass());
-        hook("mb3.f","d","void",new String[]{"com.dragon.read.base.AbsFragment"},
+        hook("pb3.f","d","void",new String[]{"com.dragon.read.base.AbsFragment"},
             (receiver,args)->reader(field(receiver,"a"))||host.readerVisible()?Decision.stop(null,"Reader automatic screen ad scheduling suppressed"):Decision.pass());
 
         popupRequests();
         hook("com.dragon.read.pop.PopProxy","enqueue","void",new String[]{"android.app.Activity","com.dragon.read.pop.IProperties",
             "com.dragon.read.pop.IPopProxy$IRunnable","com.dragon.read.pop.IPopProxy$IListener","java.lang.String"},this::popupDecision);
         // If a known ad was queued before the reader opened, finish only its popup ticket.
-        queued("mb3.c",receiver->reader(field(field(receiver,"a"),"a"))||host.readerVisible(),false);
-        queued("kh6.b$a",receiver->host.readerVisible(),true);
+        queued("pb3.c",receiver->reader(field(field(receiver,"a"),"a"))||host.readerVisible(),false);
+        queued("bi6.b$a",receiver->host.readerVisible(),true);
         queued("com.dragon.read.reader.ad.noad.InspireNoAdsDialog$Companion$a",receiver->reader(field(receiver,"a"))||host.readerVisible(),false);
         deoptimize(AD,"chapterChanged");
-        deoptimize("kh6.b","a");
+        deoptimize("bi6.b","a");
     }
 
     private boolean blockDynamic(Object owner){
         return ReaderAdRules.blockDynamicPage(host.on("hide_reader_ads"),reader(owner)?"com.dragon.read.reader.ui.ReaderActivity":null);
     }
     private void dynamicPages(){
-        for(String name:new String[]{"b","c"})hook("com.dragon.read.reader.depend.interceptors.c",name,"boolean",new String[]{"qo7.b"},
+        for(String name:new String[]{"b","c"})hook("com.dragon.read.reader.depend.interceptors.c",name,"boolean",new String[]{"up7.b"},
             (receiver,args)->blockDynamic(field(receiver,"d"))?Decision.stop(false,"Reader alternate ad page interceptor bypassed: "+name):Decision.pass());
         hook(DYNAMIC,"d","void",new String[]{CLIENT,"boolean"},(receiver,args)->{
             Object context=args[0]==null?null:args[0].getClass().getMethod("getContext").invoke(args[0]);
@@ -96,9 +96,9 @@ final class ReaderAdHooks {
             });
             host.log("Reader live ad dialog owner observer registered");
         }catch(Throwable error){host.log("Reader live ad dialog owner observer unavailable: "+error.getClass().getSimpleName());}
-        hook("lh.a","show","void",new String[]{},(receiver,args)->{
+        hook("qh.a","show","void",new String[]{},(receiver,args)->{
             Dialog dialog=(Dialog)receiver;
-            if(!blockWindow(dialog,"lh.a"))return Decision.pass();
+            if(!blockWindow(dialog,"qh.a"))return Decision.pass();
             WeakReference<Object> reference=liveDialogOwners.remove(dialog);
             Object fragment=reference==null?null:reference.get();
             if(fragment!=null)new Handler(Looper.getMainLooper()).post(()->{
@@ -110,9 +110,9 @@ final class ReaderAdHooks {
         hook("com.dragon.read.widget.dialog.AbsQueueDialog","show","void",new String[]{},(receiver,args)->{
             boolean advertising=false;
             for(Class<?> type=receiver.getClass();type!=null;type=type.getSuperclass())
-                if("mb3.b".equals(type.getName())){advertising=true;break;}
+                if("pb3.b".equals(type.getName())){advertising=true;break;}
             Dialog dialog=(Dialog)receiver;
-            if(!advertising||!blockWindow(dialog,"mb3.b"))return Decision.pass();
+            if(!advertising||!blockWindow(dialog,"pb3.b"))return Decision.pass();
             // Its native dismiss path cleans timers, mutex windows and the popup ticket.
             try{dialog.dismiss();}
             catch(Throwable error){
@@ -134,9 +134,9 @@ final class ReaderAdHooks {
         // These routes belong to ads, including the OneStop live ad service.
         hook(AD,"enterAdLiveRoom","void",new String[]{"android.content.Context","org.json.JSONObject","java.lang.String","java.lang.String"},
             (receiver,args)->blockLive(args[0])?Decision.stop(null,"Reader live ad route refused: NsAdImpl"):Decision.pass());
-        hook("com.dragon.read.ad.tomato.common.impl.LiveAdImpl","enterLiveRoom","void",new String[]{"android.app.Activity","js1.b"},
+        hook("com.dragon.read.ad.tomato.common.impl.LiveAdImpl","enterLiveRoom","void",new String[]{"android.app.Activity","os1.b"},
             (receiver,args)->blockLive(args[0])?Decision.stop(null,"Reader live ad route refused: OneStop"):Decision.pass());
-        hook("com.dragon.read.ad.util.AdUtil","b","void",new String[]{"lc3.a"},
+        hook("com.dragon.read.ad.util.AdUtil","b","void",new String[]{"oc3.a"},
             (receiver,args)->args[0]!=null&&blockLive(field(args[0],"a"))
                 ?Decision.stop(null,"Reader live ad launch refused: AdUtil"):Decision.pass());
         // The live implementation can arrive later from a separate plugin loader.
@@ -180,9 +180,9 @@ final class ReaderAdHooks {
     }
 
     private void popupRequests(){
-        String[] actions={"com.dragon.read.pop.IPopProxy$IRunnable","th0.b"};
+        String[] actions={"com.dragon.read.pop.IPopProxy$IRunnable","xh0.b"};
         for(String action:actions)for(boolean withOrigin:new boolean[]{false,true}){
-            String result=action.equals("th0.b")?TICKET:"void";
+            String result=action.equals("xh0.b")?TICKET:"void";
             String[] parameters=withOrigin?new String[]{"android.app.Activity","com.dragon.read.pop.IProperties",action,"com.dragon.read.pop.IPopProxy$IListener","java.lang.String"}
                 :new String[]{"android.app.Activity","com.dragon.read.pop.IProperties",action,"com.dragon.read.pop.IPopProxy$IListener"};
             hook("com.dragon.read.pop.PopProxy","popup",result,parameters,this::popupDecision);

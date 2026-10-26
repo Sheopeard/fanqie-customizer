@@ -38,12 +38,12 @@ final class StartupTabHooks {
                 }catch(Throwable error){host.log("Startup tab entry classification failed: "+PrivacyRules.errorType(error));}
                 try{return chain.proceed();}finally{if(state!=null)state.initializing=false;}
             });
-            module.hook(main.getDeclaredMethod("X1")).intercept(chain->{
+            module.hook(main.getDeclaredMethod("Y1")).intercept(chain->{
                 Object result=chain.proceed();Activity activity=(Activity)chain.getThisObject();State state=states.get(activity);
                 if(state==null||!state.initializing||state.finished)return result;
                 try{return resolve(result);}catch(Throwable error){host.log("Startup tab resolution failed: "+PrivacyRules.errorType(error));return result;}
             });
-            module.hook(main.getDeclaredMethod("x2",type,boolean.class,boolean.class,String.class,boolean.class)).intercept(chain->{
+            module.hook(main.getDeclaredMethod("y2",type,boolean.class,boolean.class,String.class,boolean.class)).intercept(chain->{
                 Object[] args=chain.getArgs().toArray();State state=states.get((Activity)chain.getThisObject());
                 if(state!=null&&!state.finished){
                     if(Boolean.TRUE.equals(args[1]))state.finished=true; // A user click takes precedence over pending startup work.
@@ -59,12 +59,12 @@ final class StartupTabHooks {
                 return chain.proceed();
             });
             module.deoptimize(create);
-            module.deoptimize(main.getDeclaredMethod("w2",type,boolean.class,boolean.class,String.class));
+            module.deoptimize(main.getDeclaredMethod("x2",type,boolean.class,boolean.class,String.class));
             host.log("Startup tab native hooks registered");
         }catch(Throwable error){host.log("Startup tab hooks unavailable: "+PrivacyRules.errorType(error));}
     }
     private Object resolve(Object original)throws Throwable {
-        Field tabs=Class.forName("com.dragon.read.pages.main.m4",false,loader).getDeclaredField("e");tabs.setAccessible(true);
+        Field tabs=Class.forName("com.dragon.read.pages.main.r4",false,loader).getDeclaredField("e");tabs.setAccessible(true);
         Object value=tabs.get(null);if(!(value instanceof List<?>))return original;
         Map<String,Object> actual=new LinkedHashMap<>();Set<String> hidden=new HashSet<>();
         for(Object tab:(List<?>)value)if(tab instanceof Enum<?>){

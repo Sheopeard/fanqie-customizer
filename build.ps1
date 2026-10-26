@@ -1,15 +1,15 @@
 param(
     [Parameter(Mandatory=$true)][string]$SdkRoot,
     [Parameter(Mandatory=$true)][string]$KeyStorePath,
-    [string]$JdkRoot = 'C:\Program Files\Zulu\zulu-25',
+    [string]$JdkRoot = 'C:\Program Files\Java\jdk-17',
     [string]$OutputDirectory = (Join-Path $PSScriptRoot 'build')
 )
 $ErrorActionPreference='Stop'
 $env:JAVA_HOME=$JdkRoot
 $env:PATH=(Join-Path $JdkRoot 'bin')+';'+$env:PATH
-$platform=Get-ChildItem $SdkRoot -Recurse -Filter android.jar | Select-Object -First 1 -ExpandProperty FullName
-$aapt=Get-ChildItem $SdkRoot -Recurse -Filter aapt2.exe | Select-Object -First 1 -ExpandProperty FullName
-if(-not $platform -or -not $aapt){throw 'SDK must contain Android platform 36 and Build Tools 36.0.0'}
+$platform=Join-Path $SdkRoot 'platforms\android-36\android.jar'
+$aapt=Join-Path $SdkRoot 'build-tools\36.0.0\aapt2.exe'
+if(-not (Test-Path $platform) -or -not (Test-Path $aapt)){throw 'SDK must contain Android platform 36 and Build Tools 36.0.0'}
 $tools=Split-Path $aapt
 $api=Join-Path $PSScriptRoot 'libs\api-102.0.0.jar'
 $service=Join-Path $PSScriptRoot 'libs\service-102.0.0.jar'
@@ -50,7 +50,7 @@ if(-not (Test-Path -LiteralPath $KeyStorePath)) {
     & (Join-Path $JdkRoot 'bin\keytool.exe') -genkeypair -keystore $KeyStorePath -storepass android -keypass android -alias fanqie-dev -dname 'CN=Fanqie Local Development' -keyalg RSA -keysize 2048 -validity 3650
     Check 'keytool'
 }
-$apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.5.apk'
+$apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.5.74132.apk'
 & (Join-Path $tools 'apksigner.bat') sign --ks $KeyStorePath --ks-key-alias fanqie-dev --ks-pass pass:android --key-pass pass:android --out $apk $aligned
 Check 'sign'
 & (Join-Path $tools 'apksigner.bat') verify --verbose $apk

@@ -4,7 +4,7 @@ package io.github.mianxyz.fanqiecustomizer;
 final class PostShortcutRules {
     static final String KEY="hide_post_float";
     static final String MAIN="com.dragon.read.pages.main.MainFragmentActivity";
-    static final String ROOT="dd5.o";
+    static final String ROOT="hd5.m";
     private PostShortcutRules() {}
     static boolean suppress(boolean enabled,String activity,String view){
         return enabled&&MAIN.equals(activity)&&ROOT.equals(view);

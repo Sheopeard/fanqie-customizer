@@ -23,6 +23,7 @@ public class NativeUiHooksTest {
     public static class Entrances {public List<Item> mineEcomEntranceData;}
     public static class SidebarItem {public int a;public String b;SidebarItem(int type,String label){a=type;b=label;}}
     public static class Sidebar {public List<SidebarItem> a;}
+    public static class SidebarSecondary {public List<Object> b=new ArrayList<>(List.of(new Object()));public List<Object> c=new ArrayList<>(List.of(new Object()));}
     public static void main(String[] args)throws Throwable {
         Set<String> flags=new HashSet<>();
         boolean[] tablet={false};
@@ -80,6 +81,13 @@ public class NativeUiHooksTest {
         charityMenu.a=new ArrayList<>(List.of(charityItem,settings,charityDescription));n.filterSidebarMenu(charityMenu);
         check(charityMenu.a.equals(List.of(settings,charityDescription)),"only the exact charity menu is removed from sidebar");
         flags.clear();check(n.filterCard(charityGroup,0)==charityGroup,"disabled charity switch preserves the menu");
+        SidebarSecondary secondary=new SidebarSecondary();
+        n.filterSidebarSecondary(secondary);
+        check(secondary.b.size()==1&&secondary.c.size()==1,"disabled sidebar switches preserve both areas");
+        flags.add("mine_message");n.filterSidebarSecondary(secondary);
+        check(secondary.b.size()==1&&secondary.c.isEmpty(),"message switch leaves games intact");
+        flags.clear();flags.add("hide_frequent_games");secondary=new SidebarSecondary();n.filterSidebarSecondary(secondary);
+        check(secondary.b.isEmpty()&&secondary.c.size()==1,"game switch leaves message area intact");
         System.out.println("NativeUiHooksTest passed");
     }
     static void check(boolean ok,String label){if(!ok)throw new AssertionError(label);}

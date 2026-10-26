@@ -41,7 +41,7 @@ public final class SettingsActivity extends Activity {
         if(Build.VERSION.SDK_INT>=30&&getWindow().getInsetsController()!=null){int bits=WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS|WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;getWindow().getInsetsController().setSystemBarsAppearance(dark?0:bits,bits);}
         LinearLayout hero=new LinearLayout(this);hero.setOrientation(LinearLayout.VERTICAL);hero.setPadding(dp(20),dp(18),dp(20),dp(18));
         GradientDrawable gradient=new GradientDrawable(GradientDrawable.Orientation.TL_BR,new int[]{Color.rgb(238,93,55),Color.rgb(243,131,72)});gradient.setCornerRadius(dp(22));hero.setBackground(gradient);root.addView(hero);
-        hero.addView(label("番茄界面定制",25,Color.WHITE,true));TextView version=label("7.3.9.32   ·   v5.0.5",12,0xffffeee4,false);version.setPadding(0,dp(6),0,0);hero.addView(version);
+        hero.addView(label("番茄界面定制",25,Color.WHITE,true));TextView version=label("7.4.1.32   ·   v5.0.5.74132",12,0xffffeee4,false);version.setPadding(0,dp(6),0,0);hero.addView(version);
         status=label("等待框架连接",12,ink,false);status.setPadding(dp(12),dp(8),dp(12),dp(8));LinearLayout.LayoutParams statusParams=new LinearLayout.LayoutParams(-2,-2);statusParams.topMargin=dp(10);root.addView(status,statusParams);
         status.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("配置同步状态").setMessage(app.status()).setPositiveButton("重新同步",(d,w)->app.sync()).setNegativeButton("关闭",null).show());
         LinearLayout masterCard=new LinearLayout(this);masterCard.setOrientation(LinearLayout.HORIZONTAL);masterCard.setGravity(Gravity.CENTER_VERTICAL);masterCard.setPadding(dp(15),dp(8),dp(12),dp(8));masterCard.setBackground(rounded(surface,16));
@@ -112,7 +112,7 @@ public final class SettingsActivity extends Activity {
         card("实验选项",null);toggle("local_vip","本地 VIP 判断 Hook","仅改变本地判断，不会开通服务端会员或恢复不可用内容。");note("免广告送爱发电礼物尚未加入。模块不伪造礼物到账或广告完成结果。");
         card("恢复与帮助",null);action("日志采集步骤",()->new AlertDialog.Builder(this).setTitle("采集命中日志").setMessage(Rules.LOG_GUIDE).setPositiveButton("知道了",null).show());
         action("关闭全部定制",()->new AlertDialog.Builder(this).setTitle("关闭全部定制？").setMessage("将关闭番茄定制选项和书籍编号工具入口，不改变桌面图标设置。重新打开番茄后生效。").setPositiveButton("关闭全部",(d,w)->{if(prefs.edit().clear().putBoolean("in_app_entry",false).putBoolean("hide_reader_live_popup",false).commit()){updating=true;master.setChecked(false);updating=false;app.sync();render();}else Toast.makeText(this,"保存失败，请重试",Toast.LENGTH_LONG).show();}).setNegativeButton("取消",null).show());
-        note("适配番茄免费小说 7.3.9.32。模块未添加数据上传功能；完整 LSPosed 日志仍可能含个人信息，分享前请检查。");
+        note("适配番茄免费小说 7.4.1.32。模块未添加数据上传功能；完整 LSPosed 日志仍可能含个人信息，分享前请检查。");
     }
     private void launcherIconSetting(){
         card("桌面图标","隐藏后可从 LSPosed → 模块 → 番茄界面定制 → 设置进入本页，关闭开关恢复图标。此项立即生效，不影响模块功能。");

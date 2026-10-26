@@ -12,7 +12,7 @@ final class ReaderAdRules {
         return enabled&&(BookRules.isReaderPage(ownerClass)||readerVisible);
     }
     static boolean adWindow(String className){
-        return "lh.a".equals(className)||"mb3.b".equals(className);
+        return "qh.a".equals(className)||"pb3.b".equals(className);
     }
     static boolean blockAdWindow(boolean enabled,String ownerClass,boolean readerVisible,String className){
         return blockLivePromotion(enabled,ownerClass,readerVisible)&&adWindow(className);

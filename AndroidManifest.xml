@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.github.mianxyz.fanqiecustomizer" android:versionCode="22" android:versionName="5.0.5">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.github.mianxyz.fanqiecustomizer" android:versionCode="23" android:versionName="5.0.5.74132">
     <uses-sdk android:minSdkVersion="28" android:targetSdkVersion="35" />
     <queries><package android:name="com.dragon.read" /></queries>
     <application android:name=".SettingsApp" android:label="番茄界面定制" android:icon="@drawable/ic_module" android:description="@string/module_description" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false" android:supportsRtl="true">

@@ -27,7 +27,7 @@ final class UpdatePopupHooks {
             if(!blocked(args[0]))return Decision.pass();
             host.log("Automatic upgrade eligibility suppressed");return Decision.stop(false);
         });
-        for(String action:new String[]{RUNNABLE,"th0.b"})for(boolean origin:new boolean[]{false,true}) {
+        for(String action:new String[]{RUNNABLE,"xh0.b"})for(boolean origin:new boolean[]{false,true}) {
             String[] types=origin?new String[]{"android.app.Activity",PROPERTIES,action,LISTENER,"java.lang.String"}
                 :new String[]{"android.app.Activity",PROPERTIES,action,LISTENER};
             hook("com.dragon.read.pop.PopProxy","popup",RUNNABLE.equals(action)?"void":TICKET,types,this::popup);

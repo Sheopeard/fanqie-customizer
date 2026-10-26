@@ -19,7 +19,7 @@ public final class ReaderAdRulesTest {
         check(!ReaderAdRules.blockLivePromotion(false,reader,true),"live promotion respects disabled switch");
         check(!ReaderAdRules.blockLivePromotion(true,main,false),"live promotion on other pages preserved");
         check(!ReaderAdRules.blockLivePromotion(true,null,false),"unknown owner requires foreground reader");
-        for(String window:new String[]{"lh.a","mb3.b"}){
+        for(String window:new String[]{"qh.a","pb3.b"}){
             check(ReaderAdRules.blockAdWindow(true,reader,false,window),"reader ad window refused: "+window);
             check(ReaderAdRules.blockAdWindow(true,main,true,window),"ad window refused with foreground reader: "+window);
             check(!ReaderAdRules.blockAdWindow(true,main,false,window),"ad window on other pages preserved: "+window);

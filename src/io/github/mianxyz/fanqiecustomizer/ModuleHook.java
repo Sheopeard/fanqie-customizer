@@ -50,7 +50,7 @@ public final class ModuleHook extends XposedModule {
 
     private void initialize(Application app,Context context) throws Throwable {
         PackageInfo info=context.getPackageManager().getPackageInfo(Rules.TARGET,0);
-        if(info.getLongVersionCode()!=73932L||!"7.3.9.32".equals(info.versionName)) {
+        if(!TargetVersion.supports(info.getLongVersionCode(),info.versionName)) {
             logMessage("Unsupported version; no adaptation installed.");return;
         }
         SharedPreferences prefs=getRemotePreferences(Rules.PREFS);
@@ -58,7 +58,7 @@ public final class ModuleHook extends XposedModule {
             if(PrivacyRules.settingKey(entry.getKey())&&entry.getValue() instanceof Boolean)flags.put(entry.getKey(),(Boolean)entry.getValue());
         lifecycle=new Lifecycle();app.registerActivityLifecycleCallbacks(lifecycle);
         books=new BookTools(this,new BookTools.Host(){public boolean on(String key){return ModuleHook.this.on(key);}public void log(String message){logOnce(message);}},context.getClassLoader());
-        if(!on("enabled")){logMessage("5.0.5 loaded with customizations disabled; in-app book tools entry follows its own switch.");return;}
+        if(!on("enabled")){logMessage("5.0.5.74132 loaded with customizations disabled; in-app book tools entry follows its own switch.");return;}
         books.install();
         NativeUiHooks.Host host=new NativeUiHooks.Host(){
             public boolean on(String key){return ModuleHook.this.on(key);}
@@ -84,7 +84,7 @@ public final class ModuleHook extends XposedModule {
         NativeUiHooks nativeUi=new NativeUiHooks(this,host,context.getClassLoader());
         nativeUi.countSink=features::recordCount;nativeUi.install();
         if(on("local_vip"))installVip(context.getClassLoader());
-        logMessage("5.0.5 modern API 102 loaded for 7.3.9.32.");
+        logMessage("5.0.5.74132 modern API 102 loaded for 7.4.1.32.");
     }
 
     private boolean on(String key){return flags.containsKey(key)?Boolean.TRUE.equals(flags.get(key)):Rules.defaultOn(key);}
@@ -125,7 +125,7 @@ public final class ModuleHook extends XposedModule {
         if(forcedHidden.containsKey(view))return forcedHidden.get(view);
         if("com.dragon.read.pages.main.MainFragmentActivity".equals(activity.getClass().getName())&&on("hide_post_float")){
             String cls=view.getClass().getName();
-            if(cls.equals("dd5.o")||cls.equals("com.dragon.read.editor.CollapsingPublishLayout")||cls.equals("com.dragon.read.social.ui.PublishButton")||cls.equals("com.dragon.community.common.ui.contentpublish.PublishButton"))return "hide_post_float";
+            if(cls.equals("hd5.m")||cls.equals("com.dragon.read.editor.CollapsingPublishLayout")||cls.equals("com.dragon.read.social.ui.PublishButton")||cls.equals("com.dragon.community.common.ui.contentpublish.PublishButton"))return "hide_post_float";
             if(view instanceof TextView&&"发帖子".contentEquals(((TextView)view).getText())){
                 int[] pos=new int[2];view.getLocationOnScreen(pos);
                 if(pos[0]>view.getResources().getDisplayMetrics().widthPixels/2&&pos[1]>view.getResources().getDisplayMetrics().heightPixels/2){
@@ -142,7 +142,7 @@ public final class ModuleHook extends XposedModule {
         if(on("hide_income")&&inMine(view)){
             int id=view.getId();String entry=id==View.NO_ID?null:resourceEntry(view);
             // The native My page also has a separate dynamic coin/income entry outside POLARIS.
-            if("c4t".equals(entry))return "hide_income";
+            if("c4t".equals(entry)&&view instanceof TextView&&"收益记录".contentEquals(((TextView)view).getText()))return "hide_income";
         }
         return null;
     }

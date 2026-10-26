@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$SdkRoot,
-    [string]$JdkRoot = 'C:\Program Files\Zulu\zulu-25',
+    [string]$JdkRoot = 'C:\Program Files\Java\jdk-17',
     [string]$BuildDirectory = (Join-Path $PSScriptRoot 'build')
 )
 $ErrorActionPreference='Stop'

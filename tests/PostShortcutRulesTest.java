@@ -10,7 +10,7 @@ public final class PostShortcutRulesTest {
         }
         for(String page:new String[]{null,"com.dragon.read.reader.ui.ReaderActivity","com.dragon.read.social.editor.graphpost.GraphPostEditorActivity","example.MainFragmentActivity"})
             check(!PostShortcutRules.suppress(true,page,PostShortcutRules.ROOT),"other page editor roots preserved");
-        for(String view:new String[]{null,"android.view.View","android.widget.FrameLayout","com.dragon.read.social.ui.PublishButton","com.dragon.community.common.ui.contentpublish.PublishButton","com.dragon.read.editor.CollapsingPublishLayout","dd5.o2"})
+        for(String view:new String[]{null,"android.view.View","android.widget.FrameLayout","com.dragon.read.social.ui.PublishButton","com.dragon.community.common.ui.contentpublish.PublishButton","com.dragon.read.editor.CollapsingPublishLayout","hd5.m2"})
             check(!PostShortcutRules.suppress(true,PostShortcutRules.MAIN,view),"normal editor controls and generic views preserved");
         check(!Rules.defaultOn(PostShortcutRules.KEY)&&PrivacyRules.settingKey(PostShortcutRules.KEY),"existing opt-in setting and sync key retained");
         System.out.println("PostShortcutRulesTest passed");

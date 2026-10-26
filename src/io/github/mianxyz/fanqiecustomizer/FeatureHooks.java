@@ -38,9 +38,9 @@ final class FeatureHooks {
         if(host.on("hide_frequent_games"))deserialize("com.dragon.read.rpc.model.MineGameEntranceData",v->{
             set(v,"gameItems",new ArrayList<>());
         });
-        if(host.on("hide_income"))afterResult("com.dragon.read.component.biz.impl.mine.card.model.PolarisCardWrapper","b",v->{if(v instanceof View)host.forceHide((View)v,"income card");});
-        if(host.on("hide_reader_video_entry"))after("l23.c0","j1",v->{
-            if(Boolean.TRUE.equals(invoke(v,"n1"))){Object view=invoke(v,"g1");if(view instanceof View)host.forceHide((View)view,"chapter video reward entry");}
+        if(host.on("hide_income"))afterResult("com.dragon.read.component.biz.impl.mine.card.model.PolarisCardWrapper","a",v->{if(v instanceof View)host.forceHide((View)v,"income card");});
+        if(host.on("hide_reader_video_entry"))after("n23.c0","h1",v->{
+            if(Boolean.TRUE.equals(invoke(v,"m1"))){Object view=invoke(v,"d1");if(view instanceof View)host.forceHide((View)view,"chapter video reward entry");}
         });
         if(host.on("hide_welfare_float"))blockVoid("com.dragon.read.polaris.cold.start.l","tryShowLowTakeCashFloatingView");
         if(host.on("raw_read_counts")){
