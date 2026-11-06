@@ -35,7 +35,7 @@ final class BookTools {
                 });
         }
         if(host.on("book_id_search")){
-            install("com.dragon.read.component.biz.impl.FanqieSearchActivity","A2",method->method.getParameterCount()==1&&method.getReturnType()==void.class,
+            install("com.dragon.read.component.biz.impl.FanqieSearchActivity","t2",method->method.getParameterCount()==1&&method.getReturnType()==void.class,
                 (receiver,args)->{
                     if(!(receiver instanceof Activity)||args[0]==null)return false;
                     Object raw=field(args[0],"a");String id=raw instanceof String?BookRules.searchId((String)raw):null;

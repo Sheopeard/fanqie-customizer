@@ -76,7 +76,7 @@ public final class Rules {
             case "com.dragon.read.reader.extend.banner.CoverView":return "hide_banner";
             case "com.dragon.read.ad.brand.ui.BrandChapterFrontAdView":
             case "com.dragon.read.ad.brand.ui.BrandChapterFrontTopView":
-            case "com.dragon.read.ad.cartoon.ui.CartoonCardAdView": return "hide_reader_ads";
+            case "com.dragon.read.ad.cartoon.ui.CartoonOneStopAdView": return "hide_reader_ads";
             case "com.dragon.read.component.biz.impl.bookshelf.polaris.BookshelfCoinBarView":
             case "com.dragon.read.widget.GoldCoinStickerView":
             case "com.dragon.read.goldcoinbox.widget.GoldCoinBoxCircleTipView":

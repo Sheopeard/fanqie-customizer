@@ -38,6 +38,10 @@ public class NativeUiHooksTest {
         check(result!=group&&result.b.equals(List.of(message,unknown)),"native order removed while unknown and message retained");
         check(group.b.equals(List.of(order,message,unknown))&&result.c==group.c,"cached menu and extra picture metadata preserved");
         flags.clear();check(n.filterCard(group,0)==group,"disabled menu leaves input untouched");
+        Card onlyOrder=new Card(CardType.COMMON,List.of(order));flags.add("mine_order");
+        Card emptyMenu=(Card)n.filterCard(onlyOrder,0);
+        check(emptyMenu!=null&&emptyMenu.b!=null&&emptyMenu.b.isEmpty(),"new list converter receives a non-null root with an empty menu");
+        check(onlyOrder.b.equals(List.of(order)),"empty conversion leaves the cached menu intact");flags.clear();
         check("mine_reservation".equals(Rules.mineKey(null,"VIDEO_BOOKING")),"verified reservation enum mapped");
         check(Rules.mineKey(null,"NOTE_CENTER")==null,"bookmarks are not reservations");
         Tab rec=new Tab("推荐",2),novel=new Tab("小说",25),future=new Tab("服务器新频道",1000);

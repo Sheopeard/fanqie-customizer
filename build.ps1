@@ -50,7 +50,7 @@ if(-not (Test-Path -LiteralPath $KeyStorePath)) {
     & (Join-Path $JdkRoot 'bin\keytool.exe') -genkeypair -keystore $KeyStorePath -storepass android -keypass android -alias fanqie-dev -dname 'CN=Fanqie Local Development' -keyalg RSA -keysize 2048 -validity 3650
     Check 'keytool'
 }
-$apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.5.74132.apk'
+$apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.5.74332.apk'
 & (Join-Path $tools 'apksigner.bat') sign --ks $KeyStorePath --ks-key-alias fanqie-dev --ks-pass pass:android --key-pass pass:android --out $apk $aligned
 Check 'sign'
 & (Join-Path $tools 'apksigner.bat') verify --verbose $apk

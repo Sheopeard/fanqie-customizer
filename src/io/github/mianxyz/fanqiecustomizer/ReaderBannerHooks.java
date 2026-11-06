@@ -22,8 +22,8 @@ final class ReaderBannerHooks {
             "com.dragon.read.component.biz.interfaces.NsReaderActivity","com.dragon.reader.lib.ReaderClient"
         },(receiver,args)->reader(args[0])?Decision.stop(null,"Reader bottom banner creation suppressed"):Decision.pass());
 
-        // c() creates the banner, sets config.G(height), and repaginates the text.
-        hook(ASSISTANT,"c","void",new String[0],(receiver,args)->assistantReader(receiver)?
+        // d() creates the banner, sets config.F(height), and repaginates the text.
+        hook(ASSISTANT,"d","void",new String[0],(receiver,args)->assistantReader(receiver)?
             Decision.stop(null,"Reader banner attachment and repagination suppressed"):Decision.pass());
         hook(ASSISTANT,"b","boolean",new String[0],(receiver,args)->assistantReader(receiver)?
             Decision.stop(false,"Reader banner switch kept closed"):Decision.pass());
@@ -33,19 +33,19 @@ final class ReaderBannerHooks {
         hook(ASSISTANT,"n","void",new String[]{"float"},(receiver,args)->assistantReader(receiver)?
             Decision.stop(null,"Reader banner text translation suppressed"):Decision.pass());
 
-        // E()/G(int) read/write an in-memory height used when pages are measured.
+        // D()/F(int) read/write an in-memory height used when pages are measured.
         // Scope to the native ReaderActivity, leaving other reader clients untouched.
-        hook("yp7.z0","E","int",new String[0],(receiver,args)->configReader(receiver)?
+        hook("jt7.z0","D","int",new String[0],(receiver,args)->configReader(receiver)?
             Decision.stop(0,"Reader banner reserved height kept at zero"):Decision.pass());
-        hook("yp7.z0","G","void",new String[]{"int"},(receiver,args)->{
+        hook("jt7.z0","F","void",new String[]{"int"},(receiver,args)->{
             if(configReader(receiver)){args[0]=0;host.log("Reader banner reserved height write cleared");}
             return Decision.pass();
         });
 
         // These callers can contain inlined reads of the short height/switch getters.
         deoptimize("com.dragon.read.reader.ui.ReaderActivity$g","onReceive");
-        deoptimize(ASSISTANT,"c","f");
-        deoptimize("lm6.a","d","f");
+        deoptimize(ASSISTANT,"d","g");
+        deoptimize("op6.a","d","f");
     }
 
     private static final class Decision {
