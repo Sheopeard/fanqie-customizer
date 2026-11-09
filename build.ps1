@@ -5,6 +5,9 @@ param(
     [string]$OutputDirectory = (Join-Path $PSScriptRoot 'build')
 )
 $ErrorActionPreference='Stop'
+if(-not (Test-Path -LiteralPath $KeyStorePath -PathType Leaf)) {
+    throw 'Existing signing key required. Refusing to create a replacement key.'
+}
 $env:JAVA_HOME=$JdkRoot
 $env:PATH=(Join-Path $JdkRoot 'bin')+';'+$env:PATH
 $platform=Join-Path $SdkRoot 'platforms\android-36\android.jar'
@@ -45,11 +48,6 @@ try {
 $aligned=Join-Path $OutputDirectory 'aligned.apk'
 & (Join-Path $tools 'zipalign.exe') -f -p 4 $unsigned $aligned
 Check 'zipalign'
-if(-not (Test-Path -LiteralPath $KeyStorePath)) {
-    New-Item -ItemType Directory -Force (Split-Path $KeyStorePath) | Out-Null
-    & (Join-Path $JdkRoot 'bin\keytool.exe') -genkeypair -keystore $KeyStorePath -storepass android -keypass android -alias fanqie-dev -dname 'CN=Fanqie Local Development' -keyalg RSA -keysize 2048 -validity 3650
-    Check 'keytool'
-}
 $apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.5.74332.apk'
 & (Join-Path $tools 'apksigner.bat') sign --ks $KeyStorePath --ks-key-alias fanqie-dev --ks-pass pass:android --key-pass pass:android --out $apk $aligned
 Check 'sign'
