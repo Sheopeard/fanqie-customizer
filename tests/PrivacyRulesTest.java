@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Diagnostic output must not include runtime values, even through exception causes. */
 public final class PrivacyRulesTest {

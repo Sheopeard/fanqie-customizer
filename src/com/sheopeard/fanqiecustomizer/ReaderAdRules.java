@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Advertising popup allowlist; unrelated dialogs keep their normal behavior. */
 final class ReaderAdRules {
@@ -12,7 +12,7 @@ final class ReaderAdRules {
         return enabled&&(BookRules.isReaderPage(ownerClass)||readerVisible);
     }
     static boolean adWindow(String className){
-        return "ii.a".equals(className)||"rc3.b".equals(className);
+        return "hi.a".equals(className)||"nd3.b".equals(className);
     }
     static boolean blockAdWindow(boolean enabled,String ownerClass,boolean readerVisible,String className){
         return blockLivePromotion(enabled,ownerClass,readerVisible)&&adWindow(className);

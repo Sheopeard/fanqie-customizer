@@ -15,7 +15,7 @@ $tests=Get-ChildItem (Join-Path $PSScriptRoot 'tests') -Filter '*.java' | Select
 & (Join-Path $JdkRoot 'bin\javac.exe') --release 17 -encoding UTF-8 -cp $classPath -d $testClasses @tests
 if($LASTEXITCODE -ne 0){throw 'Test compilation failed'}
 foreach($test in (Get-ChildItem (Join-Path $PSScriptRoot 'tests') -Filter '*Test.java' | Sort-Object Name | Select-Object -ExpandProperty BaseName)) {
-    $class=if($test -eq 'RulesTest'){$test}else{'io.github.mianxyz.fanqiecustomizer.'+$test}
+    $class=if($test -eq 'RulesTest'){$test}else{'com.sheopeard.fanqiecustomizer.'+$test}
     & (Join-Path $JdkRoot 'bin\java.exe') -cp "$testClasses;$classPath" $class
     if($LASTEXITCODE -ne 0){throw "$test failed"}
 }

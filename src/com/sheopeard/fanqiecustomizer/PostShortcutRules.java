@@ -1,10 +1,10 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Only the native floating editor root on the main activity is a shortcut target. */
 final class PostShortcutRules {
     static final String KEY="hide_post_float";
     static final String MAIN="com.dragon.read.pages.main.MainFragmentActivity";
-    static final String ROOT="sf5.m";
+    static final String ROOT="ei5.m";
     private PostShortcutRules() {}
     static boolean suppress(boolean enabled,String activity,String view){
         return enabled&&MAIN.equals(activity)&&ROOT.equals(view);

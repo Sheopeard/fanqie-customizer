@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Tablet filtering must match menu identities, not unrelated text or phone layouts. */
 public final class TabletRulesTest {

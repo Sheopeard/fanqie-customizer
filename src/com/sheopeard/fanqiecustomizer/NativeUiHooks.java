@@ -1,11 +1,11 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 import android.view.View;
 import io.github.libxposed.api.XposedModule;
 import java.lang.reflect.*;
 import java.util.*;
 
-/** Native 7.4.3.32 paths verified against the installed APK. */
+/** Native 7.4.5.32 paths verified against the installed APK. */
 final class NativeUiHooks {
     interface Host extends FeatureHooks.Host { void mineRoot(View root); default void pageShown(String name){} }
     interface Before { boolean apply(Object receiver,Object[] args)throws Throwable; }
@@ -20,21 +20,21 @@ final class NativeUiHooks {
     void install(){
         if(any(Rules.MINE_KEYS)||any(TabletRules.KEYS)||host.on("hide_income")){
             // The dispatcher also receives local defaults and cached plans, bypassing serializers.
-            hook("ye4.c","g",(receiver,args)->{
+            hook("wf4.c","g",(receiver,args)->{
                 if(args.length!=1||args[0]==null)return false;
                 Object card=args[0];String kind=enumName(get(card,"a"));
                 if(hiddenCard(kind)){host.log("Native card removed: "+kind);return true;}
                 args[0]=filterCard(card,0);return false;
             },null);
-            // 7.4.3.32 inlines enum conversion inside this list converter.
+            // 7.4.5.32 inlines enum conversion inside this list converter.
             // Filter its input tree and preserve the native non-null List result.
-            hook("ye4.h","a",(receiver,args)->{
+            hook("wf4.h","a",(receiver,args)->{
                 if(args.length==4&&args[0]!=null)args[0]=filterCard(args[0],0);
                 return false;
             },null);
             deoptimize("com.dragon.read.component.biz.impl.mine.FanqieMineFragmentV2$g","accept");
         }
-        if(any(Rules.MINE_KEYS)||any(TabletRules.KEYS))hook("hf4.e","a",null,(receiver,result)->{if(result!=null)filterSidebarMenu(result);});
+        if(any(Rules.MINE_KEYS)||any(TabletRules.KEYS))hook("fg4.e","a",null,(receiver,result)->{if(result!=null)filterSidebarMenu(result);});
         if(any(Rules.MINE_KEYS)||host.on("hide_income")||host.on("hide_frequent_games")){
             hook("com.dragon.read.component.biz.impl.mine.FanqieMineFragmentV2","onCreateContent",null,(receiver,result)->{
                 if(result instanceof View)host.mineRoot((View)result);
@@ -42,7 +42,7 @@ final class NativeUiHooks {
         }
         if(any(Rules.CHANNEL_KEYS)){
             // Copy at the final UI boundary so hidden channels are not written into the app cache.
-            hook("com.dragon.read.component.biz.impl.NewBookMallFragment","li",(receiver,args)->{
+            hook("com.dragon.read.component.biz.impl.NewBookMallFragment","ni",(receiver,args)->{
                 if(args.length!=1||args[0]==null)return false;
                 Object source=args[0];int oldSelection=((Number)get(source,"selectIndex")).intValue();
                 List<?> oldTabs=(List<?>)get(source,"bookMallTabDataList");
@@ -53,7 +53,7 @@ final class NativeUiHooks {
                 return false;
             },null);
             // When the default channel was removed, request the replacement's own feed.
-            hook("e34.b","a",(receiver,args)->{
+            hook("a44.b","a",(receiver,args)->{
                 if(args.length==6&&Boolean.TRUE.equals(changedDefault.get(args[0]))&&Boolean.TRUE.equals(args[3])){
                     args[3]=false;host.log("Bookmall replacement channel loads its own feed");
                 }
@@ -62,7 +62,7 @@ final class NativeUiHooks {
         }
         if(host.on("hide_income")){
             for(String name:new String[]{"com.dragon.read.component.biz.impl.mine.card.model.b1","com.dragon.read.component.biz.impl.mine.card.model.PolarisCardWrapper"})
-                hook(name,"b",null,(receiver,result)->{if(result instanceof View)host.forceHide((View)result,"native income card");});
+                hook(name,"c",null,(receiver,result)->{if(result instanceof View)host.forceHide((View)result,"native income card");});
         }
         if(host.on("hide_frequent_games")){
             hook("com.dragon.read.kmp.mine.polaris.l2","d",(receiver,args)->{
@@ -71,11 +71,11 @@ final class NativeUiHooks {
         }
         // The new sidebar receives game/message lists through this fresh KMP model.
         if(host.on("hide_frequent_games")||host.on("mine_message"))
-            hook("hf4.e","b",null,(receiver,result)->{if(result!=null)filterSidebarSecondary(result);});
+            hook("fg4.e","b",null,(receiver,result)->{if(result!=null)filterSidebarSecondary(result);});
         if(host.on("hide_welfare_float")){
-            block("com.bytedance.ug.sdk.kmp.novel.pendant.manager.PendantController","t");
+            block("com.bytedance.ug.sdk.kmp.novel.pendant.manager.PendantController","s");
             // This method installs both LuckyDog and the newer Lucky scene pendant on Main.
-            block("com.dragon.read.pages.main.MainFragmentActivity","G2");
+            block("com.dragon.read.pages.main.MainFragmentActivity","K2");
             block("com.bytedance.ug.sdk.luckydog.api.LuckyDogSDK","showPendantInFrameLayout");
             block("com.bytedance.ug.sdk.luckydog.api.LuckyDogSDK","showPendant");
         }
@@ -188,7 +188,7 @@ final class NativeUiHooks {
             String key=menuKey(title,rpcKind(type));if(key==null||!host.on(key))kept.add(item);
         }
         if(kept.size()!=original.size()){
-            // hf4.e.a creates a fresh ArrayList and returns it to Compose state. The source cache is untouched.
+            // fg4.e.a creates a fresh ArrayList and returns it to Compose state. The source cache is untouched.
             @SuppressWarnings("unchecked") List<Object> mutable=(List<Object>)original;
             mutable.clear();mutable.addAll(kept);host.log("Sidebar menu filtered");
         }

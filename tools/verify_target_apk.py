@@ -1,4 +1,4 @@
-"""Check the declared 7.4.3.32 reflection contract without running the host app."""
+"""Check the declared 7.4.5.32 reflection contract without running the host app."""
 import argparse
 import hashlib
 import json
@@ -10,7 +10,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('apk',type=Path)
     args=parser.parse_args()
-    contract=json.loads((Path(__file__).resolve().parents[1]/'tests/apk-contract-74332.json').read_text(encoding='utf8'))
+    contract=json.loads((Path(__file__).resolve().parents[1]/'tests/apk-contract-74532.json').read_text(encoding='utf8'))
     digest=hashlib.sha256(args.apk.read_bytes()).hexdigest()
     classes={}
     with zipfile.ZipFile(args.apk) as archive:

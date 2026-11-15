@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 import java.util.*;
 import java.lang.reflect.*;
 import android.view.View;

@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Update suppression must not hide security, permissions or similarly named UI. */
 public final class UpdatePopupRulesTest {

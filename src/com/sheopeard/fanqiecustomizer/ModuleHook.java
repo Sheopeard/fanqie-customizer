@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 import android.app.*;
 import android.content.*;
@@ -58,7 +58,7 @@ public final class ModuleHook extends XposedModule {
             if(PrivacyRules.settingKey(entry.getKey())&&entry.getValue() instanceof Boolean)flags.put(entry.getKey(),(Boolean)entry.getValue());
         lifecycle=new Lifecycle();app.registerActivityLifecycleCallbacks(lifecycle);
         books=new BookTools(this,new BookTools.Host(){public boolean on(String key){return ModuleHook.this.on(key);}public void log(String message){logOnce(message);}},context.getClassLoader());
-        if(!on("enabled")){logMessage("5.0.5.74332 loaded with customizations disabled; in-app book tools entry follows its own switch.");return;}
+        if(!on("enabled")){logMessage("5.0.5.74532 loaded with customizations disabled; in-app book tools entry follows its own switch.");return;}
         books.install();
         NativeUiHooks.Host host=new NativeUiHooks.Host(){
             public boolean on(String key){return ModuleHook.this.on(key);}
@@ -84,7 +84,7 @@ public final class ModuleHook extends XposedModule {
         NativeUiHooks nativeUi=new NativeUiHooks(this,host,context.getClassLoader());
         nativeUi.countSink=features::recordCount;nativeUi.install();
         if(on("local_vip"))installVip(context.getClassLoader());
-        logMessage("5.0.5.74332 modern API 102 loaded for 7.4.3.32.");
+        logMessage("5.0.5.74532 modern API 102 loaded for 7.4.5.32.");
     }
 
     private boolean on(String key){return flags.containsKey(key)?Boolean.TRUE.equals(flags.get(key)):Rules.defaultOn(key);}
@@ -125,7 +125,7 @@ public final class ModuleHook extends XposedModule {
         if(forcedHidden.containsKey(view))return forcedHidden.get(view);
         if("com.dragon.read.pages.main.MainFragmentActivity".equals(activity.getClass().getName())&&on("hide_post_float")){
             String cls=view.getClass().getName();
-            if(cls.equals("sf5.m")||cls.equals("com.dragon.read.editor.CollapsingPublishLayout")||cls.equals("com.dragon.read.social.ui.PublishButton")||cls.equals("com.dragon.community.common.ui.contentpublish.PublishButton"))return "hide_post_float";
+            if(cls.equals("ei5.m")||cls.equals("com.dragon.read.editor.CollapsingPublishLayout")||cls.equals("com.dragon.read.social.ui.PublishButton")||cls.equals("com.dragon.community.common.ui.contentpublish.PublishButton"))return "hide_post_float";
             if(view instanceof TextView&&"发帖子".contentEquals(((TextView)view).getText())){
                 int[] pos=new int[2];view.getLocationOnScreen(pos);
                 if(pos[0]>view.getResources().getDisplayMetrics().widthPixels/2&&pos[1]>view.getResources().getDisplayMetrics().heightPixels/2){

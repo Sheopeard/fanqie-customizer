@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Regressions for IDs, search interception and the native fold toggle. */
 public final class BookRulesTest {

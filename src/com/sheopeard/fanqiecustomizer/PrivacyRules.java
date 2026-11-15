@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Keep diagnostic and preference keys limited to names defined by this module. */
 final class PrivacyRules {

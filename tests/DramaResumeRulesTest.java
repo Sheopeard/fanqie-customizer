@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Preserve explicit playback, non-video records, other pages and disabled settings. */
 public final class DramaResumeRulesTest {

@@ -1,11 +1,11 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 import io.github.libxposed.api.XposedModule;
 import java.lang.reflect.Method;
 
 /** Stop the automatic video-history pendant before attachment, player preparation or callbacks. */
 final class DramaResumeHooks {
-    private static final String MANAGER="hh6.e0";
+    private static final String MANAGER="xk6.e0";
     private static final String MODEL="com.dragon.read.pages.bookmall.model.RecentReadModel";
     private final XposedModule module;
     private final FeatureHooks.Host host;
@@ -21,7 +21,7 @@ final class DramaResumeHooks {
         hook("e",new String[]{"android.app.Activity",MODEL,"boolean"},args->
             DramaResumeRules.attach(host.on(DramaResumeRules.KEY),video(args[1]),Boolean.TRUE.equals(args[2]),args[0]==null?null:args[0].getClass().getName()));
         deoptimize(MANAGER,"b");deoptimize(MANAGER,"i");
-        deoptimize("hh6.f0","run");deoptimize("hh6.e0$c","onActivityResumed");
+        deoptimize("xk6.f0","run");deoptimize("xk6.e0$c","onActivityResumed");
     }
     private boolean video(Object model)throws ReflectiveOperationException{
         return model!=null&&model.getClass().getField("isVideo").getBoolean(model);

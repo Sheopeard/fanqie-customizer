@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Automatic app upgrades only; security, login and unrelated updates stay intact. */
 final class UpdatePopupRules {

@@ -1,18 +1,18 @@
 <div align="center">
   <img src="icon.svg" width="96" height="96" alt="番茄 UI 自定义图标" />
   <h1>番茄 UI 自定义</h1>
-  <p>LSPosed 模块 · 番茄小说 7.4.3.32
+  <p>LSPosed 模块 · 番茄小说 7.4.5.32
 </div>
 
-此 fork 为番茄免费小说 **7.4.3.32（74332）** 的实验适配版，模块版本 **5.0.5.74332（24）**。
+此 fork 为番茄免费小说 **7.4.5.32（74532）** 的适配版，模块版本 **5.0.5.74532（25）**。
 
 已依据手机实际安装的 APK 核对反射目标，完成本地构建、签名检查和规则测试。**尚未完成手机界面验收**，不承诺所有动态广告或服务器下发样式均有效。
 
 - 源码来自 [mianxyz/fanqie-customizer](https://github.com/mianxyz/fanqie-customizer)；用户提供的 Xposed-Modules-Repo 仓库用于分发。
-- 本版沿用上次 7.4.1.32 适配包的包名和签名，版本码升至 24。已核对当前手机模块签名，可直接覆盖安装并保留设置。作者签名的原版模块仍不能直接覆盖。
+- 本版已更换为独立模块包名 `com.sheopeard.fanqiecustomizer` 并升至版本码 25，因此与原 `io.github.mianxyz.fanqiecustomizer` 包无法直接覆盖升级、设置也不互通，可卸载旧版后再安装本版；同包名同签名的后续版本可直接覆盖安装并保留设置。
 - 在支持 libxposed API 102 的框架内启用模块，作用域选择番茄免费小说，由用户手动强行停止后重新打开番茄。若有异常，先禁用此模块并重开番茄。
 - 安装、框架开关及界面确认均由用户操作。仓库不包含番茄 APK、反编译源码、设备日志或签名私钥。
-- 具体变化、验证方法和待验收项目见 [ADAPTATION-74332.md](ADAPTATION-74332.md)。
+- 具体变化、验证方法和待验收项目见 [ADAPTATION-74532.md](ADAPTATION-74532.md)。
 
 一款专为 **番茄免费小说** 打造的 LSPosed 界面定制模块。
 
@@ -24,10 +24,10 @@
 |---|---|
 | 目标应用 | 番茄免费小说 |
 | 应用包名 | `com.dragon.read` |
-| 适配版本 | **7.4.3.32（74332）** |
+| 适配版本 | **7.4.5.32（74532）** |
 | Android 版本 | Android 9 及以上 |
 | 框架要求 | 支持 libxposed API 102 的 LSPosed 框架 |
-| 模块包名 | `io.github.mianxyz.fanqiecustomizer` |
+| 模块包名 | `com.sheopeard.fanqiecustomizer` |
 
 **注意：** 本模块仅针对指定版本进行适配，其他版本的番茄免费小说不会加载本版适配规则。
 

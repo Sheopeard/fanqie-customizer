@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Pure rules shared by native search, the ID dialog and reader badges. */
 public final class BookRules {

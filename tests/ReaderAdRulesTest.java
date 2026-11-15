@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Ad queue scope must preserve login, permissions, security and ordinary reader menus. */
 public final class ReaderAdRulesTest {
@@ -19,7 +19,7 @@ public final class ReaderAdRulesTest {
         check(!ReaderAdRules.blockLivePromotion(false,reader,true),"live promotion respects disabled switch");
         check(!ReaderAdRules.blockLivePromotion(true,main,false),"live promotion on other pages preserved");
         check(!ReaderAdRules.blockLivePromotion(true,null,false),"unknown owner requires foreground reader");
-        for(String window:new String[]{"ii.a","rc3.b"}){
+        for(String window:new String[]{"hi.a","nd3.b"}){
             check(ReaderAdRules.blockAdWindow(true,reader,false,window),"reader ad window refused: "+window);
             check(ReaderAdRules.blockAdWindow(true,main,true,window),"ad window refused with foreground reader: "+window);
             check(!ReaderAdRules.blockAdWindow(true,main,false,window),"ad window on other pages preserved: "+window);
@@ -33,7 +33,7 @@ public final class ReaderAdRulesTest {
         check(!ReaderAdRules.blockLiveLaunch(false,true,reader,true,live),"live player launch respects ad switch");
         check(!ReaderAdRules.blockLiveLaunch(true,false,reader,true,live),"live player launch respects independent opt-out");
         check(!ReaderAdRules.blockLiveLaunch(true,true,main,false,live),"live player from other pages preserved");
-        for(String target:new String[]{null,main,"com.dragon.read.reader.ui.ReaderActivity","com.dragon.read.plugin.live.OtherActivity","com.dragon.read.plugin.live.XsLivePlayerActivityHelper","com.bytedance.mira.stub.p0.StubSingleTaskActivity1","io.github.mianxyz.fanqiecustomizer.SettingsActivity"})
+        for(String target:new String[]{null,main,"com.dragon.read.reader.ui.ReaderActivity","com.dragon.read.plugin.live.OtherActivity","com.dragon.read.plugin.live.XsLivePlayerActivityHelper","com.bytedance.mira.stub.p0.StubSingleTaskActivity1","com.sheopeard.fanqiecustomizer.SettingsActivity"})
             check(!ReaderAdRules.blockLiveLaunch(true,true,reader,true,target),"non-live target preserved: "+target);
         check(ReaderAdRules.blockLiveTransition(true,true,reader,0,live),"immediate reader transition blocked");
         check(ReaderAdRules.blockLiveTransition(true,true,reader,1500,live),"transition boundary included");

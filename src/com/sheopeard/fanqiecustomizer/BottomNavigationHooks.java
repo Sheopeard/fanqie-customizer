@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -26,7 +26,7 @@ final class BottomNavigationHooks {
     void install(){
         if(!host.on("enabled")||hiddenKeys.isEmpty())return;
         try{
-            Class<?> bar=Class.forName(BottomNavigationRules.BAR,false,loader),button=Class.forName("so7.g",false,loader);
+            Class<?> bar=Class.forName(BottomNavigationRules.BAR,false,loader),button=Class.forName("ks7.g",false,loader);
             buttons=bar.getDeclaredMethod("getTabButtonList");
             buttonView=button.getMethod("getView");buttonType=button.getMethod("a");
             if(buttons.getReturnType()!=List.class||buttonView.getReturnType()!=View.class||!buttonType.getReturnType().isEnum())throw new NoSuchMethodException();
@@ -34,14 +34,14 @@ final class BottomNavigationHooks {
             module.hook(constructor).intercept(chain->{
                 Object result=chain.proceed();attach(chain.getThisObject());return result;
             });
-            after(bar.getDeclaredMethod("J1",button));
-            after(bar.getDeclaredMethod("K1",button,boolean.class,boolean.class));
+            after(bar.getDeclaredMethod("p3",button));
+            after(bar.getDeclaredMethod("r3",button,boolean.class,boolean.class));
             host.log("Bottom navigation early binding hooks registered");
         }catch(Throwable error){failure("installation",error);}
         // The app also draws a separate five-icon Lottie row beside the native bar.
         // Select its existing static-icon branch while individual entries are hidden.
         try{
-            Class<?> main=Class.forName(MAIN,false,loader);Method animated=main.getDeclaredMethod("l2");
+            Class<?> main=Class.forName(MAIN,false,loader);Method animated=main.getDeclaredMethod("n2");
             if(animated.getReturnType()!=boolean.class||!java.lang.reflect.Modifier.isStatic(animated.getModifiers()))throw new NoSuchMethodException();
             module.hook(animated).intercept(chain->{
                 if(!BottomNavigationRules.animation(host.on("enabled"),hiddenKeys,true))return false;
@@ -72,7 +72,7 @@ final class BottomNavigationHooks {
         try{
             if(buttons==null){
                 buttons=bar.getClass().getMethod("getTabButtonList");
-                Class<?> button=Class.forName("so7.g",false,loader);buttonView=button.getMethod("getView");buttonType=button.getMethod("a");
+                Class<?> button=Class.forName("ks7.g",false,loader);buttonView=button.getMethod("getView");buttonType=button.getMethod("a");
             }
             Object list=buttons.invoke(bar);if(!(list instanceof List<?>))return false;
             List<View> views=new ArrayList<>();List<String> types=new ArrayList<>();

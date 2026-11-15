@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** The automatic history pendant and explicit background player use different native modes. */
 final class DramaResumeRules {

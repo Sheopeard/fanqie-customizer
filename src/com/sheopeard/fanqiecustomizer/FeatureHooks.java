@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 import android.app.Activity;
 import android.view.View;
@@ -38,9 +38,9 @@ final class FeatureHooks {
         if(host.on("hide_frequent_games"))deserialize("com.dragon.read.rpc.model.MineGameEntranceData",v->{
             set(v,"gameItems",new ArrayList<>());
         });
-        if(host.on("hide_income"))afterResult("com.dragon.read.component.biz.impl.mine.card.model.PolarisCardWrapper","b",v->{if(v instanceof View)host.forceHide((View)v,"income card");});
-        if(host.on("hide_reader_video_entry"))after("n33.c0","g1",v->{
-            if(Boolean.TRUE.equals(invoke(v,"l1"))){Object view=invoke(v,"d1");if(view instanceof View)host.forceHide((View)view,"chapter video reward entry");}
+        if(host.on("hide_income"))afterResult("com.dragon.read.component.biz.impl.mine.card.model.PolarisCardWrapper","c",v->{if(v instanceof View)host.forceHide((View)v,"income card");});
+        if(host.on("hide_reader_video_entry"))after("b43.c0","k1",v->{
+            if(Boolean.TRUE.equals(invoke(v,"l1"))){Object view=invoke(v,"h1");if(view instanceof View)host.forceHide((View)view,"chapter video reward entry");}
         });
         if(host.on("hide_welfare_float"))blockVoid("com.dragon.read.polaris.cold.start.l","tryShowLowTakeCashFloatingView");
         if(host.on("raw_read_counts")){

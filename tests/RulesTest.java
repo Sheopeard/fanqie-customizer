@@ -1,4 +1,4 @@
-import io.github.mianxyz.fanqiecustomizer.Rules;
+import com.sheopeard.fanqiecustomizer.Rules;
 import java.util.*;
 public class RulesTest {
     public static void main(String[] args) {

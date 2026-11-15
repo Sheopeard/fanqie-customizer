@@ -1,9 +1,9 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 import java.util.*;
 
 public final class Rules {
-    public static final String PACKAGE = "io.github.mianxyz.fanqiecustomizer";
+    public static final String PACKAGE = "com.sheopeard.fanqiecustomizer";
     public static final String TARGET = "com.dragon.read";
     public static final String PREFS = "settings";
     public static final String LOG_GUIDE = "开启模块中的‘输出命中日志’，确认配置已同步。强行停止并重新打开番茄，在问题页面复现后，进入 LSPosed → 日志 → 模块日志，导出并保存日志。\n\n日志可能包含个人信息，分享前请检查并遮盖敏感内容。";

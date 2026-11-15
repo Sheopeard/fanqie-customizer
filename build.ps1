@@ -35,6 +35,7 @@ Check 'resources'
 $unsigned=Join-Path $OutputDirectory 'unsigned.apk'
 & $aapt link -o $unsigned -I $platform --manifest (Join-Path $PSScriptRoot 'AndroidManifest.xml') --min-sdk-version 28 --target-sdk-version 35 $resources
 Check 'link'
+Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $zip=[System.IO.Compression.ZipFile]::Open($unsigned,[System.IO.Compression.ZipArchiveMode]::Update)
 try {
@@ -48,7 +49,7 @@ try {
 $aligned=Join-Path $OutputDirectory 'aligned.apk'
 & (Join-Path $tools 'zipalign.exe') -f -p 4 $unsigned $aligned
 Check 'zipalign'
-$apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.5.74332.apk'
+$apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.5.74532.apk'
 & (Join-Path $tools 'apksigner.bat') sign --ks $KeyStorePath --ks-key-alias fanqie-dev --ks-pass pass:android --key-pass pass:android --out $apk $aligned
 Check 'sign'
 & (Join-Path $tools 'apksigner.bat') verify --verbose $apk

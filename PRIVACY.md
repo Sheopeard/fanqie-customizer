@@ -1,6 +1,6 @@
 # 番茄界面定制 5.0.5 隐私检查
 
-模块自有代码没有主动上传、统计或自动反馈功能。本版包名为 `io.github.mianxyz.fanqiecustomizer`；其中 `mianxyz` 是经授权使用的公开 GitHub 发布标识，会出现在包名、类名和模块元数据中。
+模块自有代码没有主动上传、统计或自动反馈功能。本版包名为 `com.sheopeard.fanqiecustomizer`（基于开源项目 [mianxyz/fanqie-customizer](https://github.com/mianxyz/fanqie-customizer) 修改），包名仅作为 Android 应用标识与模块命名空间出现。
 
 发布材料不应包含个人工作目录、电脑名称、设备配置、原始日志或签名私钥。公开发布标识与这些私人数据分别检查。静态检查不包含设备抓包，也不代表对番茄、框架及其他模块的数据行为作出保证。
 

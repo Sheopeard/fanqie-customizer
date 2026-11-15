@@ -1,4 +1,4 @@
-package io.github.mianxyz.fanqiecustomizer;
+package com.sheopeard.fanqiecustomizer;
 
 /** Exact native menu identities; opt-in filtering is limited to tablet-sized layouts. */
 final class TabletRules {
