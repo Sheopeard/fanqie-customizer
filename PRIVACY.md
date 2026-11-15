@@ -1,4 +1,4 @@
-# 番茄界面定制 5.0.5 隐私检查
+# 番茄界面定制 5.0.6 隐私检查
 
 模块自有代码没有主动上传、统计或自动反馈功能。本版包名为 `com.sheopeard.fanqiecustomizer`（基于开源项目 [mianxyz/fanqie-customizer](https://github.com/mianxyz/fanqie-customizer) 修改），包名仅作为 Android 应用标识与模块命名空间出现。
 

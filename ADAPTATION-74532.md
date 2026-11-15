@@ -6,14 +6,14 @@
 - 目标宿主版本：`7.4.5.32`（`versionCode: 74532`）
 - 目标宿主基准 APK SHA-256：`5afa20fe3b944cd9b80301187e87745a1bb4729778d0edb0d1a123c54df70176`
 - 模块包名：`com.sheopeard.fanqiecustomizer`
-- 模块版本：`5.0.5.74532`（`versionCode: 25`）
-- 本地签名成品包（`build\74532\fanqie-customizer-5.0.5.74532.apk`）SHA-256：`FF6462AFF54470BB34695942BBE5795BEA46BCD7695986A13B7E945B8C26E092`（`apksigner verify` v3 通过）
-- 云端无签名构建产物（`build\cloud-74532\fanqie-customizer-5.0.5.74532-unsigned.apk`）SHA-256：`2d53d22567977f8b2dd096219968d03661efe0d8744a603c9ed2b781316cf4f7`
+- 模块版本：`5.0.6.74532`（`versionCode: 26`）
+- 本地签名成品包（`build\74532\fanqie-customizer-5.0.6.74532.apk`）SHA-256：`4A55FDFC2CFAEEFF280AB9561869CD1959B75F9D5076439CFEC27B0785735C83`（`apksigner verify` v3 通过）
+- 云端无签名构建产物（`build\cloud-74532\fanqie-customizer-5.0.6.74532-unsigned.apk`）SHA-256：`d3f65e2bb3a5d54a9d0d783218d3ac1479cd4b3209d469a5d3c51507d0c24941`
 
 ## 7.4.3.32 -> 7.4.5.32 主要适配变更
 
 1. **版本门控与清单**：
-   - `TargetVersion` 与 `AndroidManifest.xml` 更新至 `74532L` / `7.4.5.32`（模块 `versionName="5.0.5.74532"`, `versionCode="25"`）。
+   - `TargetVersion` 与 `AndroidManifest.xml` 更新至 `74532L` / `7.4.5.32`（模块 `versionName="5.0.6.74532"`, `versionCode="26"`）。
 2. **阅读页广告与弹窗拦截（`ReaderAdHooks` / `ReaderAdRules` / `ReaderBannerHooks`）**：
    - 阅读页横幅开关 `com.dragon.read.reader.extend.banner.a.b()Z` 迁移为 `c()Z`（7.4.5.32 中 `b(Z)V` 为关闭横幅方法）；`op6.a` -> `et6.a`；配置类 `jt7.z0` 高度读取/写入 `D/F` -> `bx7.z0.E/H`。
    - 翻页拦截器参数 `ft7.b` -> `xw7.b`；`interceptors.b.f` 改为 `interceptors.b$a`，通过 `field(field(receiver,"f"),"a")` 解析 `NsReaderActivity`。

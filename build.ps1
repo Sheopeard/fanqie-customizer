@@ -49,7 +49,7 @@ try {
 $aligned=Join-Path $OutputDirectory 'aligned.apk'
 & (Join-Path $tools 'zipalign.exe') -f -p 4 $unsigned $aligned
 Check 'zipalign'
-$apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.5.74532.apk'
+$apk=Join-Path $OutputDirectory 'fanqie-customizer-5.0.6.74532.apk'
 & (Join-Path $tools 'apksigner.bat') sign --ks $KeyStorePath --ks-key-alias fanqie-dev --ks-pass pass:android --key-pass pass:android --out $apk $aligned
 Check 'sign'
 & (Join-Path $tools 'apksigner.bat') verify --verbose $apk

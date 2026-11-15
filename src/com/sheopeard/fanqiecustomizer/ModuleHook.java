@@ -58,7 +58,7 @@ public final class ModuleHook extends XposedModule {
             if(PrivacyRules.settingKey(entry.getKey())&&entry.getValue() instanceof Boolean)flags.put(entry.getKey(),(Boolean)entry.getValue());
         lifecycle=new Lifecycle();app.registerActivityLifecycleCallbacks(lifecycle);
         books=new BookTools(this,new BookTools.Host(){public boolean on(String key){return ModuleHook.this.on(key);}public void log(String message){logOnce(message);}},context.getClassLoader());
-        if(!on("enabled")){logMessage("5.0.5.74532 loaded with customizations disabled; in-app book tools entry follows its own switch.");return;}
+        if(!on("enabled")){logMessage("5.0.6.74532 loaded with customizations disabled; in-app book tools entry follows its own switch.");return;}
         books.install();
         NativeUiHooks.Host host=new NativeUiHooks.Host(){
             public boolean on(String key){return ModuleHook.this.on(key);}
@@ -84,7 +84,7 @@ public final class ModuleHook extends XposedModule {
         NativeUiHooks nativeUi=new NativeUiHooks(this,host,context.getClassLoader());
         nativeUi.countSink=features::recordCount;nativeUi.install();
         if(on("local_vip"))installVip(context.getClassLoader());
-        logMessage("5.0.5.74532 modern API 102 loaded for 7.4.5.32.");
+        logMessage("5.0.6.74532 modern API 102 loaded for 7.4.5.32.");
     }
 
     private boolean on(String key){return flags.containsKey(key)?Boolean.TRUE.equals(flags.get(key)):Rules.defaultOn(key);}

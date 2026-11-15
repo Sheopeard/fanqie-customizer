@@ -4,12 +4,12 @@
   <p>LSPosed 模块 · 番茄小说 7.4.5.32
 </div>
 
-此 fork 为番茄免费小说 **7.4.5.32（74532）** 的适配版，模块版本 **5.0.5.74532（25）**。
+此 fork 为番茄免费小说 **7.4.5.32（74532）** 的适配版，模块版本 **5.0.6.74532（26）**。
 
 已依据手机实际安装的 APK 核对反射目标，完成本地构建、签名检查和规则测试。**尚未完成手机界面验收**，不承诺所有动态广告或服务器下发样式均有效。
 
 - 源码来自 [mianxyz/fanqie-customizer](https://github.com/mianxyz/fanqie-customizer)；用户提供的 Xposed-Modules-Repo 仓库用于分发。
-- 本版已更换为独立模块包名 `com.sheopeard.fanqiecustomizer` 并升至版本码 25，因此与原 `io.github.mianxyz.fanqiecustomizer` 包无法直接覆盖升级、设置也不互通，可卸载旧版后再安装本版；同包名同签名的后续版本可直接覆盖安装并保留设置。
+- 本版已更换为独立模块包名 `com.sheopeard.fanqiecustomizer` 并升至版本码 26，因此与原 `io.github.mianxyz.fanqiecustomizer` 包无法直接覆盖升级、设置也不互通，可卸载旧版后再安装本版；同包名同签名的后续版本可直接覆盖安装并保留设置。
 - 在支持 libxposed API 102 的框架内启用模块，作用域选择番茄免费小说，由用户手动强行停止后重新打开番茄。若有异常，先禁用此模块并重开番茄。
 - 安装、框架开关及界面确认均由用户操作。仓库不包含番茄 APK、反编译源码、设备日志或签名私钥。
 - 具体变化、验证方法和待验收项目见 [ADAPTATION-74532.md](ADAPTATION-74532.md)。

@@ -41,7 +41,7 @@ public final class SettingsActivity extends Activity {
         if(Build.VERSION.SDK_INT>=30&&getWindow().getInsetsController()!=null){int bits=WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS|WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;getWindow().getInsetsController().setSystemBarsAppearance(dark?0:bits,bits);}
         LinearLayout hero=new LinearLayout(this);hero.setOrientation(LinearLayout.VERTICAL);hero.setPadding(dp(20),dp(18),dp(20),dp(18));
         GradientDrawable gradient=new GradientDrawable(GradientDrawable.Orientation.TL_BR,new int[]{Color.rgb(238,93,55),Color.rgb(243,131,72)});gradient.setCornerRadius(dp(22));hero.setBackground(gradient);root.addView(hero);
-        hero.addView(label("番茄界面定制",25,Color.WHITE,true));TextView version=label("7.4.5.32   ·   v5.0.5.74532",12,0xffffeee4,false);version.setPadding(0,dp(6),0,0);hero.addView(version);
+        hero.addView(label("番茄界面定制",25,Color.WHITE,true));TextView version=label("7.4.5.32   ·   v5.0.6.74532",12,0xffffeee4,false);version.setPadding(0,dp(6),0,0);hero.addView(version);
         status=label("等待框架连接",12,ink,false);status.setPadding(dp(12),dp(8),dp(12),dp(8));LinearLayout.LayoutParams statusParams=new LinearLayout.LayoutParams(-2,-2);statusParams.topMargin=dp(10);root.addView(status,statusParams);
         status.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("配置同步状态").setMessage(app.status()).setPositiveButton("重新同步",(d,w)->app.sync()).setNegativeButton("关闭",null).show());
         LinearLayout masterCard=new LinearLayout(this);masterCard.setOrientation(LinearLayout.HORIZONTAL);masterCard.setGravity(Gravity.CENTER_VERTICAL);masterCard.setPadding(dp(15),dp(8),dp(12),dp(8));masterCard.setBackground(rounded(surface,16));
